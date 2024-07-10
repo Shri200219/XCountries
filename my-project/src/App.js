@@ -1,25 +1,24 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 export default function App() {
   const [countries, setCountries] = useState([]);
-  useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const response = await fetch("https://restcountries.com/v3.1/all");
-        const data = await response.json();
-        setCountries(data);
-      } catch (err) {
-        console.error("Error fetching data: ", err);
-      }
-    };
-    fetchCountries();
-  }, []);
 
+  useEffect(() => {
+    const fetchCountries = async()=>{
+    try {
+      const response = await fetch("https://restcountries.com/v3.1/all");
+      const data = await response.json();
+      setCountries(data);
+  } catch (err) {
+      console.log("Error fetching data: ", err);
+  }}
+  fetchCountries()
+  }, []);
   const cardStyle = {
-    Width: "200px",
+    width: "200px",
     border: "1px solid #ccc",
+    borderRadius: "10px",
     margin: "10px",
     padding: "10px",
     display: "flex",
@@ -28,7 +27,7 @@ export default function App() {
     justifyContent: "center",
   };
 
-  const imgStyle = {
+  const imageStyle = {
     width: "100px",
     height: "100px",
   };
@@ -37,18 +36,17 @@ export default function App() {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    alignItem: "center",
+    alignItems: "center",
     height: "100vh",
   };
-
   return (
     <div style={containerStyle}>
       {countries.map((country) => (
-        <div key={country} style={cardStyle}>
+        <div key={country.cca3} style={cardStyle}>
           <img
             src={country.flags.png}
             alt={`Flag of ${country.name.common}`}
-            style={imgStyle}
+            style={imageStyle}
           />
           <h2>{country.name.common}</h2>
         </div>
