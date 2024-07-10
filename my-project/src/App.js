@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 
-
 export default function App() {
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
-    const fetchCountries = async()=>{
-    try {
-      const response = await fetch("https://xcountries-backend.azurewebsites.net/all");
-      const data = await response.json();
-      setCountries(data);
-  } catch (err) {
-      console.log("Error fetching data: ", err);
-  }}
-  fetchCountries()
+    const fetchCountries = async () => {
+      try {
+        const response = await fetch("https://xcountries-backend.azurewebsites.net/all");
+        const data = await response.json();
+        setCountries(data);
+      } catch (err) {
+        console.log("Error fetching data: ", err);
+      }
+    };
+    fetchCountries();
   }, []);
+
   const cardStyle = {
     width: "200px",
     border: "1px solid #ccc",
@@ -39,16 +40,17 @@ export default function App() {
     alignItems: "center",
     height: "100vh",
   };
+
   return (
     <div style={containerStyle}>
       {countries.map((country) => (
-        <div key={country.cca3} style={cardStyle}>
+        <div key={country.abbr} style={cardStyle}>
           <img
-            src={country.flags.png}
-            alt={`Flag of ${country.name.common}`}
+            src={country.flag}
+            alt={`Flag of ${country.name}`}
             style={imageStyle}
           />
-          <h2>{country.name.common}</h2>
+          <h2>{country.name}</h2>
         </div>
       ))}
     </div>
