@@ -10,7 +10,7 @@ export default function App() {
         const data = await response.json();
         setCountries(data);
       } catch (err) {
-        console.log("Error fetching data: ", err);
+        console.error("Error fetching data: ", err);
       }
     };
     fetchCountries();
@@ -40,6 +40,9 @@ export default function App() {
     alignItems: "center",
     height: "100vh",
   };
+  const textCenter = {
+    textAlign:"center"
+  }
 
   return (
     <div style={containerStyle}>
@@ -50,7 +53,7 @@ export default function App() {
             alt={`Flag of ${country.name}`}
             style={imageStyle}
           />
-          <h2>{country.name}</h2>
+          <h2 style={textCenter}>{country.name}</h2>
         </div>
       ))}
     </div>
